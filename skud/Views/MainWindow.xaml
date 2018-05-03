@@ -1,0 +1,33 @@
+﻿<Window x:Class="skud.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:wtf="clr-namespace:skud.Views"
+        Title="Контроль пропусков" Height="350" Width="525"
+        Background="#eee">
+    
+    
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition  Height="auto"/>
+            <RowDefinition  Height="auto"/>
+            <RowDefinition  Height="auto"/>
+        </Grid.RowDefinitions>
+        <wtf:AccessStatus Margin="5 5 5 0"/>
+        <Menu Grid.Row="0">
+            <MenuItem Header="База">
+                <MenuItem Header="Должности"/>
+                <MenuItem Header="Звания"/>
+                <MenuItem Header="Пользователи"/>
+                <MenuItem Header="История"/>
+            </MenuItem>
+            <MenuItem Header="Настройки"/>
+            <MenuItem Header="О программе"/>
+        </Menu>
+        
+        <wtf:UserProfileCard Grid.Row="2" Margin="5 5 5 0"/>
+        <wtf:Arrows Grid.Row="3" Margin="5 5 5 0"/>
+        
+    </Grid>
+</Window>
