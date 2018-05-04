@@ -1,17 +1,15 @@
-﻿<UserControl x:Class="skud.Views.UserProfileCard"
+﻿<UserControl x:Class="skud.Views.Controls.UserProfileCard"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="200" d:DesignWidth="400">
-    <Border BorderThickness="1" CornerRadius="3" Background="White" Padding="5">
-        <Border.Effect>
-            <DropShadowEffect Color="#ccc" Opacity="0.5" Direction="0" ShadowDepth="2" BlurRadius="4"/>
-        </Border.Effect>
+    
+    <GroupBox Header="Пользователь">
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
+                <ColumnDefinition MaxWidth="300"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Image Grid.Column="0" Source="/Images/person-male.png"/>
@@ -22,17 +20,18 @@
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="20"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Row="0">ФИО:</TextBlock>
                 <TextBlock Grid.Row="1">Должность:</TextBlock>
                 <TextBlock Grid.Row="2">Звание:</TextBlock>
 
-                <TextBlock Grid.Row="0" Grid.Column="1">%ФИО%</TextBlock>
-                <TextBlock Grid.Row="1" Grid.Column="1">%Должность%</TextBlock>
-                <TextBlock Grid.Row="2" Grid.Column="1">%Звание%</TextBlock>
+                <TextBlock Grid.Row="0" Grid.Column="2">%ФИО%</TextBlock>
+                <TextBlock Grid.Row="1" Grid.Column="2">%Должность%</TextBlock>
+                <TextBlock Grid.Row="2" Grid.Column="2">%Звание%</TextBlock>
             </Grid>
         </Grid>
-    </Border>
+    </GroupBox>
 </UserControl>

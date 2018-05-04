@@ -1,20 +1,21 @@
 ﻿<Window x:Class="skud.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:wtf="clr-namespace:skud.Views"
-        Title="Контроль пропусков" Height="350" Width="525"
-        Background="#eee">
-    
-    
-    
+        xmlns:Controls="clr-namespace:skud.Views.Controls"
+        Title="Контроль пропусков" Height="650" Width="450"
+        MinHeight="650" MinWidth="450"
+        Background="#fff">
+
+
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition  Height="auto"/>
             <RowDefinition  Height="auto"/>
             <RowDefinition  Height="auto"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
-        <wtf:AccessStatus Margin="5 5 5 0"/>
         <Menu Grid.Row="0">
             <MenuItem Header="База">
                 <MenuItem Header="Должности"/>
@@ -25,9 +26,11 @@
             <MenuItem Header="Настройки"/>
             <MenuItem Header="О программе"/>
         </Menu>
-        
-        <wtf:UserProfileCard Grid.Row="2" Margin="5 5 5 0"/>
-        <wtf:Arrows Grid.Row="3" Margin="5 5 5 0"/>
-        
+
+        <Controls:AccessStatus Grid.Row="1" Margin="5 5 5 0"/>
+        <Controls:Arrows Grid.Row="2" Margin="5 5 5 0"/>
+        <Controls:UserProfileCard Grid.Row="3" Margin="5 5 5 0"/>
+        <Controls:LogView Grid.Row="4"  Margin="5 5 5 5"/>
+
     </Grid>
 </Window>

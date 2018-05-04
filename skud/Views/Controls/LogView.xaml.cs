@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace skud.Views
+namespace skud.Views.Controls
 {
     /// <summary>
-    /// Логика взаимодействия для Arrows.xaml
+    /// Логика взаимодействия для LogView.xaml
     /// </summary>
-    public partial class Arrows : UserControl
+    public partial class LogView : UserControl
     {
-        public Arrows()
+        public LogView()
         {
             InitializeComponent();
         }

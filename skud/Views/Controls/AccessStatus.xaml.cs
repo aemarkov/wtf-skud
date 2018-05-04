@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace skud.Views
+namespace skud.Views.Controls
 {
     /// <summary>
-    /// Логика взаимодействия для UserProfileCard.xaml
+    /// Логика взаимодействия для AccessStatus.xaml
     /// </summary>
-    public partial class UserProfileCard : UserControl
+    public partial class AccessStatus : UserControl
     {
-        public UserProfileCard()
+        public AccessStatus()
         {
             InitializeComponent();
         }

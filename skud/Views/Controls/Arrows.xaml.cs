@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace skud.Views
+namespace skud.Views.Controls
 {
     /// <summary>
-    /// Логика взаимодействия для AccessStatus.xaml
+    /// Логика взаимодействия для Arrows.xaml
     /// </summary>
-    public partial class AccessStatus : UserControl
+    public partial class Arrows : UserControl
     {
-        public AccessStatus()
+        public Arrows()
         {
             InitializeComponent();
         }

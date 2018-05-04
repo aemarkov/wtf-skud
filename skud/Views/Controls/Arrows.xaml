@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="skud.Views.Arrows"
+﻿<UserControl x:Class="skud.Views.Controls.Arrows"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -30,10 +30,7 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <Border BorderThickness="1" CornerRadius="3" Background="White" Padding="5">
-        <Border.Effect>
-            <DropShadowEffect Color="#ccc" Opacity="0.5" Direction="0" ShadowDepth="2" BlurRadius="8"/>
-        </Border.Effect>
+    <GroupBox Header="Направление">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -42,5 +39,6 @@
             <Image Grid.Column="0" Style="{StaticResource left_arrow_icon_style}" Source="/Images/arrow_left_disable.png"/>
             <Image Grid.Column="1" Style="{StaticResource right_arrow_icon_style}"/>
         </Grid>
-    </Border>
+    </GroupBox>
+
 </UserControl>

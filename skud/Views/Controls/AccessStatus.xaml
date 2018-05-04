@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="skud.Views.AccessStatus"
+﻿<UserControl x:Class="skud.Views.Controls.AccessStatus"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -33,13 +33,11 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <Border BorderThickness="1" CornerRadius="3" Background="White" Padding="5">
-        <Border.Effect>
-            <DropShadowEffect Color="#ccc" Opacity="0.5" Direction="0" ShadowDepth="2" BlurRadius="8"/>
-        </Border.Effect>
+    <GroupBox Header="Статус">
         <Grid>
             <TextBlock Grid.Row="1" Style="{StaticResource access_granted_style}">Доступ разрешен</TextBlock>
             <TextBlock Grid.Row="1" Style="{StaticResource access_denied_style}">Доступ запрещен</TextBlock>
         </Grid>
-    </Border>
+    </GroupBox>
+
 </UserControl>
