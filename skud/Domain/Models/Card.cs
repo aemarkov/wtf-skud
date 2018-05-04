@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace skud.Models
+namespace skud.Domain.Models
 {
     /// <summary>
     /// Пропуск
@@ -16,7 +16,7 @@ namespace skud.Models
         /// Уникальный идентификатор карты
         /// </summary>
         [Key]
-        public long Uid { get; set; }
+        public ulong Uid { get; set; }
 
         /// <summary>
         /// Дата выдачи

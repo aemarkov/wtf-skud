@@ -41,10 +41,10 @@
                 <TextBlock Grid.Row="2">Звание:</TextBlock>
                 <TextBlock Grid.Row="3">Отдел:</TextBlock>
 
-                <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding FIO}"/>
-                <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding Position.Name}"/>
-                <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding Rank.Name}"/>
-                <TextBlock Grid.Row="3" Grid.Column="2" Text="{Binding Department.Name}"/>
+                <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding FIO}" TextWrapping="Wrap"/>
+                <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding Position.Name}" TextWrapping="Wrap"/>
+                <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding Rank.Name}" TextWrapping="Wrap"/>
+                <TextBlock Grid.Row="3" Grid.Column="2" Text="{Binding Department.Name}" TextWrapping="Wrap"/>
             </Grid>
         </Grid>
     </GroupBox>

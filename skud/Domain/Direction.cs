@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace skud.Models
+namespace skud.Domain
 {
-    public enum AccessStatus
+    public enum Direction
     {
-        GRANTED,
-        DENIED
+        IN, OUT
     }
 }

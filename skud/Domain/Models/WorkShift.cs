@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace skud.Models
+namespace skud.Domain.Models
 {
     /// <summary>
     /// Рабочая смена
@@ -13,7 +13,7 @@ namespace skud.Models
     {
         public int Id { get; set; }
 
-        public int CardId { get; set; }
+        public ulong CardId { get; set; }
         public Card Card { get; set; }
 
         /// <summary>

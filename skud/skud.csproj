@@ -67,8 +67,11 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Converters\IsNullConverter.cs" />
-    <Compile Include="Models\AccessStatus.cs" />
-    <Compile Include="Models\Direction.cs" />
+    <Compile Include="Domain\AccessController.cs" />
+    <Compile Include="Domain\AccessRequestDelegate.cs" />
+    <Compile Include="Domain\AccessStatus.cs" />
+    <Compile Include="Domain\ArduinoGateway.cs" />
+    <Compile Include="Domain\Direction.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\LogItemViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
@@ -120,12 +123,12 @@
       <DependentUpon>201805031422291_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\Card.cs" />
-    <Compile Include="Models\Department.cs" />
-    <Compile Include="Models\Position.cs" />
-    <Compile Include="Models\Rank.cs" />
-    <Compile Include="Models\User.cs" />
-    <Compile Include="Models\WorkShift.cs" />
+    <Compile Include="Domain\Models\Card.cs" />
+    <Compile Include="Domain\Models\Department.cs" />
+    <Compile Include="Domain\Models\Position.cs" />
+    <Compile Include="Domain\Models\Rank.cs" />
+    <Compile Include="Domain\Models\User.cs" />
+    <Compile Include="Domain\Models\WorkShift.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

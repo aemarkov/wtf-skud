@@ -29,8 +29,8 @@
 
         <Controls:AccessStatus Grid.Row="1" Margin="5 5 5 0" DataContext="{Binding AccessStatus}"/>
         <Controls:Arrows Grid.Row="2" Margin="5 5 5 0" DataContext="{Binding Direction}"/>
-        <Controls:UserProfileCard Grid.Row="3" Margin="5 5 5 0" DataContext="{Binding User}"/>
-        <Controls:LogView Grid.Row="4"  Margin="5 5 5 5" DataContext="{Binding EventLog}"/>
+        <Controls:UserProfileCard Grid.Row="3" Margin="5 5 5 0" DataContext="{Binding Controller.User}"/>
+        <Controls:LogView Grid.Row="4"  Margin="5 5 5 5" DataContext="{Binding Controller.EventLog}"/>
 
     </Grid>
 </Window>

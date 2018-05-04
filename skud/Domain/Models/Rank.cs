@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace skud.Models
+namespace skud.Domain.Models
 {
     /// <summary>
     /// Звание

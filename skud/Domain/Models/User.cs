@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace skud.Models
+namespace skud.Domain.Models
 {
     public class User : INotifyPropertyChanged
     {

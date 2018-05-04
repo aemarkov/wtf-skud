@@ -4,10 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace skud.Models
+namespace skud.Domain
 {
-    public enum Direction
-    {
-        IN, OUT
-    }
+    public delegate bool AccessRequestDelegate(ulong uid, Direction direction);
 }

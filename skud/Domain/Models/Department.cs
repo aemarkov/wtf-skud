@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace skud.Models
+namespace skud.Domain.Models
 {
     /// <summary>
-    /// Позиция
+    /// Отдел
     /// </summary>
-    public class Position
+    public class Department
     {
         public int Id { get; set; }
         public string Name { get; set; }

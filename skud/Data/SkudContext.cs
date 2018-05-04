@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
-using skud.Models;
+using skud.Domain.Models;
 
 namespace skud.Data
 {
