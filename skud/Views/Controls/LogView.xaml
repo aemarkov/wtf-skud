@@ -7,13 +7,14 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <GroupBox Header="История событий">
-            <DataGrid>
+            <DataGrid ItemsSource="{Binding}" ColumnWidth="*" AutoGenerateColumns="False"
+                      IsReadOnly="True">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Время" Width="*"/>
-                    <DataGridTextColumn Header="ID карты" Width="*"/>
-                    <DataGridTextColumn Header="ФИО" Width="*"/>
-                    <DataGridTextColumn Header="Направление" Width="*"/>
-                    <DataGridTextColumn Header="Статус" Width="*"/>
+                    <DataGridTextColumn Header="Время" Binding="{Binding Date}"/>
+                    <DataGridTextColumn Header="ID карты"  Binding="{Binding CardId}"/>
+                    <DataGridTextColumn Header="ФИО" Binding="{Binding Fio}"/>
+                    <DataGridTextColumn Header="Направление" Binding="{Binding Direction}"/>
+                    <DataGridTextColumn Header="Статус" Binding="{Binding Status}"/>
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>
