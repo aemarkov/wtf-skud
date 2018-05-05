@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,11 +13,15 @@ namespace skud.Domain.Models
     /// </summary>
     public class Card
     {        
+
+        //public int Id { get; set; }
+
         /// <summary>
         /// Уникальный идентификатор карты
         /// </summary>
         [Key]
-        public ulong Uid { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public long Uid { get; set; }
 
         /// <summary>
         /// Дата выдачи

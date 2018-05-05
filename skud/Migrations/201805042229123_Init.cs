@@ -73,7 +73,6 @@ namespace skud.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        CardId = c.Int(nullable: false),
                         ArrivalTime = c.DateTime(nullable: false),
                         LeavingTime = c.DateTime(nullable: false),
                         Card_Uid = c.Long(),

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +20,8 @@ namespace skud.Domain
     {     
         public ObservableCollection<LogItemViewModel> EventLog { get; set; }
         public User User { get; set; }
+        public Direction? Direction { get; set; }
+        public AccessStatus? Access { get; set; }
 
         private SkudContext _ctx;
 
@@ -37,23 +40,24 @@ namespace skud.Domain
         public bool AccessRequest(ulong uid, Direction direction)
         {
             User = GetUser(uid);
-            AccessStatus status;
 
             if (User != null)
             {
-                if (direction == Direction.IN)
+                if (direction == Domain.Direction.IN)
                 {
                     var ws = new WorkShift()
                     {
                         ArrivalTime = DateTime.Now,
-                        CardId = uid
+                        CardId = (long)uid
                     };
                     _ctx.WorkShifts.Add(ws);
                     _ctx.SaveChanges();
                 }
-                else 
+                else
                 {
-                    var last = _ctx.WorkShifts.Where(x => x.CardId == uid).LastOrDefault();
+                    long id = (long) uid;
+                    var last = _ctx.WorkShifts.Where(x => x.CardId == id).OrderByDescending(x => x.Id)
+                        .FirstOrDefault();
                     if (last != null)
                     {
                         last.LeavingTime = DateTime.Now;
@@ -61,30 +65,35 @@ namespace skud.Domain
                     }
                 }
 
-                status = AccessStatus.GRANTED;
+                Access = AccessStatus.GRANTED;
+                Direction = direction;
             }
             else
             {
-                status = AccessStatus.DENIED;
+                Access = AccessStatus.DENIED;
+                Direction = null;
             }
 
             EventLog.Add(new LogItemViewModel()
             {
                 Date = DateTime.Now,
                 CardId = uid,
-                Fio = User.FIO,
-                Direction = Direction.IN,
-                Status = status
+                Fio = User?.FIO,
+                Direction = direction,
+                Status = Access.Value
             });
-            return (status == AccessStatus.GRANTED);
+            return (Access == AccessStatus.GRANTED);
         }
 
         private User GetUser(ulong uid)
         {
-            //_ctx.Cards.FirstOrDefault(x => x.Uid == uid && x.IssueDate <= DateTime.Now && x.ExpirationDate >= DateTime.Now);
+            long id = (long) uid; //EF не поддерживает unsigned
             return _ctx.Cards
-                .Where(x => x.Uid == uid && x.IssueDate <= DateTime.Now && x.ExpirationDate >= DateTime.Now)
+                .Where(x => x.Uid == id && x.IssueDate <= DateTime.Now && x.ExpirationDate >= DateTime.Now)
                 .Select(x => x.User)
+                .Include(x=>x.Department)
+                .Include(x => x.Position)
+                .Include(x => x.Rank)
                 .FirstOrDefault();
         }
 

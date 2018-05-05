@@ -19,6 +19,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using skud.Domain.Hardware;
+using skud.Views.Windows;
 
 namespace skud
 {
@@ -26,10 +28,7 @@ namespace skud
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window, INotifyPropertyChanged
-    {
-        public Direction? Direction { get; set; }
-        public AccessStatus? AccessStatus { get; set; }
-        public User User { get; set; }
+    {      
         public AccessController Controller { get; set; }
 
         private ArduinoGateway _arduino;
@@ -41,6 +40,7 @@ namespace skud
 
             Controller = new AccessController(new SkudContext());
             _arduino = new ArduinoGateway(Controller.AccessRequest);
+            new FakeHardwareWindow(Controller.AccessRequest).Show();            
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

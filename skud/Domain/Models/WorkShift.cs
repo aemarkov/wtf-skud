@@ -13,17 +13,17 @@ namespace skud.Domain.Models
     {
         public int Id { get; set; }
 
-        public ulong CardId { get; set; }
+        public long CardId { get; set; }
         public Card Card { get; set; }
 
         /// <summary>
         /// Дата и время прихода
         /// </summary>
-        public DateTime ArrivalTime { get; set; }
+        public DateTime? ArrivalTime { get; set; }
 
         /// <summary>
         /// Дата и время ухода
         /// </summary>
-        public DateTime LeavingTime { get; set; }
+        public DateTime? LeavingTime { get; set; }
     }
 }
