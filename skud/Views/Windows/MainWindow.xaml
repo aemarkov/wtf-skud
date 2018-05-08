@@ -18,10 +18,10 @@
         </Grid.RowDefinitions>
         <Menu Grid.Row="0">
             <MenuItem Header="База">
-                <MenuItem Header="Должности"/>
-                <MenuItem Header="Звания"/>
-                <MenuItem Header="Пользователи"/>
-                <MenuItem Header="История"/>
+                <MenuItem x:Name="mnuPositions" Header="Должности" Click="mnuPositions_Click"/>
+                <MenuItem x:Name="mnuRanks" Header="Звания" Click="mnuRanks_Click"/>
+                <MenuItem x:Name="mnuUsers" Header="Пользователи" Click="mnuUsers_Click"/>
+                <MenuItem x:Name="mnuHistory" Header="История" Click="mnuHistory_Click"/>
             </MenuItem>
             <MenuItem Header="Настройки"/>
             <MenuItem Header="О программе"/>

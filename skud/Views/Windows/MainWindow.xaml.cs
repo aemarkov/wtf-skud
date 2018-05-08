@@ -44,6 +44,33 @@ namespace skud
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+       
+
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+            Application.Current.Shutdown();
+        }
+
+        private void mnuPositions_Click(object sender, RoutedEventArgs e)
+        {
+            new PositionsWindow().Show();
+        }
+
+        private void mnuRanks_Click(object sender, RoutedEventArgs e)
+        {
+            new RanksWindow().Show();
+        }
+
+        private void mnuUsers_Click(object sender, RoutedEventArgs e)
+        {
+            new UsersWindow().Show();
+        }
+
+        private void mnuHistory_Click(object sender, RoutedEventArgs e)
+        {
+            new HistoryWindow().Show();
+        }
     }
 
     
