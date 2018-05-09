@@ -9,7 +9,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using skud.Domain.Hardware;
+using System.Windows;
 
 namespace skud.Domain
 {
@@ -35,6 +35,11 @@ namespace skud.Domain
         }
 
         private void Instance_AccessRequested(ulong uid, Direction direction)
+        {
+            Application.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Background, new Action(() => AccessRequested(uid, direction)));
+        }
+
+        private void AccessRequested(ulong uid, Direction direction)
         {
             User = GetUser(uid);
 
@@ -81,7 +86,7 @@ namespace skud.Domain
             });
 
             ArduinoGateway.Instance.SetAccess(Access.Value);
-        }       
+        }
 
         private User GetUser(ulong uid)
         {

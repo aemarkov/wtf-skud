@@ -76,8 +76,9 @@
     <Compile Include="Converters\IsNullConverter.cs" />
     <Compile Include="Domain\AccessController.cs" />
     <Compile Include="Domain\AccessStatus.cs" />
-    <Compile Include="Domain\Hardware\ArduinoHardware.cs" />
+    <Compile Include="Domain\ArduinoHardware.cs" />
     <Compile Include="Domain\Direction.cs" />
+    <Compile Include="Domain\PackageBuilder.cs" />
     <Compile Include="Helpers\EditHelpers.cs" />
     <Compile Include="Migrations\201805091223479_Init.cs" />
     <Compile Include="Migrations\201805091223479_Init.Designer.cs">

@@ -41,11 +41,16 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
                             <DataGrid x:Name="cardsGrid" AutoGenerateColumns="False"
-                                      CanUserAddRows="False">
+                                      IsReadOnly="True">
+                                <DataGrid.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem x:Name="mnuRemoveSelected" Click="mnuRemoveSelected_Click"  Header="Удалить  карту"/>
+                                    </ContextMenu>
+                                </DataGrid.ContextMenu>
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn Binding="{Binding Uid}" Header="Uid" Width="*" IsReadOnly="True"/>
-                                    <DataGridTextColumn Binding="{Binding IssueDate}" Header="Дата выдачи" Width="*" IsReadOnly="True"/>
-                                    <DataGridTextColumn Binding="{Binding ExpirationDate}" Header="Дата истечения" Width="*" IsReadOnly="True"/>
+                                    <DataGridTextColumn Binding="{Binding Uid}" Header="Uid" Width="*"/>
+                                    <DataGridTextColumn Binding="{Binding IssueDate}" Header="Дата выдачи" Width="*"/>
+                                    <DataGridTextColumn Binding="{Binding ExpirationDate}" Header="Дата истечения" Width="*"/>
                                 </DataGrid.Columns>
                             </DataGrid>
                             <Button x:Name="btnAddCard" Grid.Row="1" Margin="0 5 0 5" Click="BtnAddCard_OnClick">

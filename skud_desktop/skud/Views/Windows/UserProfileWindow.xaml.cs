@@ -24,7 +24,12 @@ namespace skud.Views.Windows
     /// </summary>
     public partial class UserProfileWindow : Window, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        // Пользователь
         public User User { get; private set; }
+
+        // Рабочие смены
         public List<WorkShift> Shifts { get; private set; }
 
         private SkudContext _ctx;
@@ -54,14 +59,14 @@ namespace skud.Views.Windows
             // Загружаем карты
             UpdateCards();
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
+       
+        // Открываем окно добавления кары
         private void BtnAddCard_OnClick(object sender, RoutedEventArgs e)
         {
             var dlg = new AddCardWindow(_userId);
             if (dlg.ShowDialog() ?? false)
             {
+                // Если добавление прошло успешно, обновляем список карт
                 UpdateCards();
             }
         }
@@ -70,6 +75,18 @@ namespace skud.Views.Windows
         {
             _ctx.Cards.Where(x => x.UserId == _userId).ToList();
             cardsGrid.ItemsSource = _ctx.Cards.Local;
+        }
+
+        // Удаление выбранных карт
+        private void mnuRemoveSelected_Click(object sender, RoutedEventArgs e)
+        {
+            while (cardsGrid.SelectedItems.Count > 0)
+            {
+                var card = (Card)cardsGrid.SelectedItems[0];
+                _ctx.Cards.Remove(card);
+            }
+
+            _ctx.SaveChanges();
         }
     }
 }

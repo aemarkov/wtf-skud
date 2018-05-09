@@ -14,7 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using skud.Data;
-using skud.Domain.Hardware;
+using skud.Domain;
 using skud.Domain.Models;
 
 namespace skud.Views.Windows
@@ -52,23 +52,38 @@ namespace skud.Views.Windows
 
         private void BtnOk_OnClick(object sender, RoutedEventArgs e)
         {
-            Card = new Card()
-            {
-                UserId = _userId,
-                IssueDate = DateTime.Now,
-                ExpirationDate = ExpirationDate,
-                Uid = (long)CardUid
-            };
-
             using (var ctx = new SkudContext())
             {
+
+                if (ctx.Cards.Any(x => x.Uid == (long)CardUid))
+                {
+                    MessageBox.Show("Карта уже зарегестрирована в системе", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+
+                Card = new Card()
+                {
+                    UserId = _userId,
+                    IssueDate = DateTime.Now,
+                    ExpirationDate = ExpirationDate,
+                    Uid = (long)CardUid
+                };
+
+
                 ctx.Cards.Add(Card);
+                ctx.SaveChanges();
             }
 
             DialogResult = true;
             Close();
         }
 
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+            ArduinoGateway.Instance.CardRead -= Instance_CardRead;
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
-    }
+    }   
 }
