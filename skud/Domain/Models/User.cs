@@ -57,18 +57,7 @@ namespace skud.Domain.Models
         /// Отдел
         /// </summary>
         public Department Department { get; set; }
-        public int DepartmentId { get; set; }
-      
-        /// <summary>
-        /// История рабочих смен
-        /// </summary>
-        public ICollection<WorkShift> WorkShifts
-        {
-            get { return _shifts ?? (_shifts = new List<WorkShift>()); }
-            set { _shifts = value; }
-        }
-        private ICollection<WorkShift> _shifts;
-
+        public int DepartmentId { get; set; }           
 
         public string FIO { get { return String.Format("{0} {1} {2}", Surname, Name, Middlename); } }
 

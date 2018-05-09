@@ -9,6 +9,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using skud.Domain.Hardware;
 
 namespace skud.Domain
 {
@@ -29,15 +30,11 @@ namespace skud.Domain
         {
             _ctx = ctx;
             EventLog = new ObservableCollection<LogItemViewModel>();
+
+            ArduinoGateway.Instance.AccessRequested += Instance_AccessRequested;
         }
 
-        /// <summary>
-        /// Проверка доступа
-        /// </summary>
-        /// <param name="uid">Идентификатор карты пользователя</param>
-        /// <param name="direction">Направление прохода</param>
-        /// <returns>Можно пропустить или нет</returns>        
-        public bool AccessRequest(ulong uid, Direction direction)
+        private void Instance_AccessRequested(ulong uid, Direction direction)
         {
             User = GetUser(uid);
 
@@ -48,15 +45,15 @@ namespace skud.Domain
                     var ws = new WorkShift()
                     {
                         ArrivalTime = DateTime.Now,
-                        CardId = (long)uid
+                        CardUid = (long)uid
                     };
                     _ctx.WorkShifts.Add(ws);
                     _ctx.SaveChanges();
                 }
                 else
                 {
-                    long id = (long) uid;
-                    var last = _ctx.WorkShifts.Where(x => x.CardId == id).OrderByDescending(x => x.Id)
+                    long id = (long)uid;
+                    var last = _ctx.WorkShifts.Where(x => x.CardUid == id).OrderByDescending(x => x.Id)
                         .FirstOrDefault();
                     if (last != null)
                     {
@@ -82,8 +79,9 @@ namespace skud.Domain
                 Direction = direction,
                 Status = Access.Value
             });
-            return (Access == AccessStatus.GRANTED);
-        }
+
+            ArduinoGateway.Instance.SetAccess(Access.Value);
+        }       
 
         private User GetUser(ulong uid)
         {

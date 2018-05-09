@@ -11,7 +11,7 @@ namespace skud.Migrations
                 "dbo.Cards",
                 c => new
                     {
-                        Uid = c.Long(nullable: false, identity: true),
+                        Uid = c.Long(nullable: false),
                         IssueDate = c.DateTime(nullable: false),
                         ExpirationDate = c.DateTime(nullable: false),
                         UserId = c.Int(nullable: false),
@@ -25,10 +25,10 @@ namespace skud.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Surname = c.String(),
-                        Name = c.String(),
-                        Middlename = c.String(),
-                        Photo = c.String(),
+                        Surname = c.String(maxLength: 4000),
+                        Name = c.String(maxLength: 4000),
+                        Middlename = c.String(maxLength: 4000),
+                        Photo = c.String(maxLength: 4000),
                         PositionId = c.Int(nullable: false),
                         RankId = c.Int(nullable: false),
                         DepartmentId = c.Int(nullable: false),
@@ -46,7 +46,7 @@ namespace skud.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
+                        Name = c.String(maxLength: 4000),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -55,7 +55,7 @@ namespace skud.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
+                        Name = c.String(maxLength: 4000),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -64,7 +64,7 @@ namespace skud.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
+                        Name = c.String(maxLength: 4000),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -73,29 +73,23 @@ namespace skud.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        ArrivalTime = c.DateTime(nullable: false),
-                        LeavingTime = c.DateTime(nullable: false),
-                        Card_Uid = c.Long(),
-                        User_Id = c.Int(),
+                        CardUid = c.Long(nullable: false),
+                        ArrivalTime = c.DateTime(),
+                        LeavingTime = c.DateTime(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Cards", t => t.Card_Uid)
-                .ForeignKey("dbo.Users", t => t.User_Id)
-                .Index(t => t.Card_Uid)
-                .Index(t => t.User_Id);
-            
+                .ForeignKey("dbo.Cards", t => t.CardUid, cascadeDelete: true)
+                .Index(t => t.CardUid);            
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.WorkShifts", "User_Id", "dbo.Users");
-            DropForeignKey("dbo.WorkShifts", "Card_Uid", "dbo.Cards");
+            DropForeignKey("dbo.WorkShifts", "CardUid", "dbo.Cards");
             DropForeignKey("dbo.Users", "RankId", "dbo.Ranks");
             DropForeignKey("dbo.Users", "PositionId", "dbo.Positions");
             DropForeignKey("dbo.Users", "DepartmentId", "dbo.Departments");
             DropForeignKey("dbo.Cards", "UserId", "dbo.Users");
-            DropIndex("dbo.WorkShifts", new[] { "User_Id" });
-            DropIndex("dbo.WorkShifts", new[] { "Card_Uid" });
+            DropIndex("dbo.WorkShifts", new[] { "CardUid" });
             DropIndex("dbo.Users", new[] { "DepartmentId" });
             DropIndex("dbo.Users", new[] { "RankId" });
             DropIndex("dbo.Users", new[] { "PositionId" });

@@ -31,16 +31,14 @@ namespace skud
     {      
         public AccessController Controller { get; set; }
 
-        private ArduinoGateway _arduino;
-
         public MainWindow()
         {
             InitializeComponent();
             DataContext = this;
 
             Controller = new AccessController(new SkudContext());
-            _arduino = new ArduinoGateway(Controller.AccessRequest);
-            new FakeHardwareWindow(Controller.AccessRequest).Show();  
+            /*_arduino = new ArduinoGateway(Controller.AccessRequest);
+            new FakeHardwareWindow(Controller.AccessRequest).Show();*/
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

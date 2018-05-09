@@ -13,7 +13,7 @@ namespace skud.Domain.Models
     {
         public int Id { get; set; }
 
-        public long CardId { get; set; }
+        public long CardUid { get; set; }
         public Card Card { get; set; }
 
         /// <summary>
@@ -25,5 +25,10 @@ namespace skud.Domain.Models
         /// Дата и время ухода
         /// </summary>
         public DateTime? LeavingTime { get; set; }
+
+        public TimeSpan? Duration
+        {
+            get { return LeavingTime - ArrivalTime; }            
+        }
     }
 }

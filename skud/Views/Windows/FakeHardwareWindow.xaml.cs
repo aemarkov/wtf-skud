@@ -20,23 +20,23 @@ namespace skud.Views.Windows
     /// </summary>
     public partial class FakeHardwareWindow : Window
     {
-        private AccessRequestDelegate _handler;
+        /*private AccessRequestDelegate _handler;
 
         public FakeHardwareWindow(AccessRequestDelegate handler)
         {
             InitializeComponent();
             _handler = handler;
-        }
+        }*/
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Direction direction = (rbtnIn.IsChecked ?? false) ? Direction.IN : Direction.OUT;
+            /*Direction direction = (rbtnIn.IsChecked ?? false) ? Direction.IN : Direction.OUT;
             ulong uid = ulong.Parse(txtUid.Text);
             bool isAccess = _handler(uid, direction);
             if (isAccess)
                 lblAccess.Text = "разрешен";
             else
-                lblAccess.Text = "запрещен";
+                lblAccess.Text = "запрещен";*/
         }
     }
 }

@@ -75,23 +75,13 @@
     </ApplicationDefinition>
     <Compile Include="Converters\IsNullConverter.cs" />
     <Compile Include="Domain\AccessController.cs" />
-    <Compile Include="Domain\AccessRequestDelegate.cs" />
     <Compile Include="Domain\AccessStatus.cs" />
     <Compile Include="Domain\Hardware\ArduinoHardware.cs" />
     <Compile Include="Domain\Direction.cs" />
-    <Compile Include="Domain\Hardware\BaseHardware.cs" />
     <Compile Include="Helpers\EditHelpers.cs" />
-    <Compile Include="Migrations\201805042229123_Init.cs" />
-    <Compile Include="Migrations\201805042229123_Init.Designer.cs">
-      <DependentUpon>201805042229123_Init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201805042245534_ChangeModels.cs" />
-    <Compile Include="Migrations\201805042245534_ChangeModels.Designer.cs">
-      <DependentUpon>201805042245534_ChangeModels.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201805042257385_Wtf.cs" />
-    <Compile Include="Migrations\201805042257385_Wtf.Designer.cs">
-      <DependentUpon>201805042257385_Wtf.cs</DependentUpon>
+    <Compile Include="Migrations\201805091223479_Init.cs" />
+    <Compile Include="Migrations\201805091223479_Init.Designer.cs">
+      <DependentUpon>201805091223479_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
@@ -108,6 +98,9 @@
     </Compile>
     <Compile Include="Views\Controls\UserProfileCard.xaml.cs">
       <DependentUpon>UserProfileCard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\AddCardWindow.xaml.cs">
+      <DependentUpon>AddCardWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Windows\DepartmentsWindow.xaml.cs">
       <DependentUpon>DepartmentsWindow.xaml</DependentUpon>
@@ -136,6 +129,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Controls\LogView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\AddCardWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -208,14 +205,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Migrations\201805042229123_Init.resx">
-      <DependentUpon>201805042229123_Init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805042245534_ChangeModels.resx">
-      <DependentUpon>201805042245534_ChangeModels.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805042257385_Wtf.resx">
-      <DependentUpon>201805042257385_Wtf.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201805091223479_Init.resx">
+      <DependentUpon>201805091223479_Init.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -20,11 +20,39 @@
                     <TabItem.Header>
                         <TextBlock>Рабочие смены</TextBlock>
                     </TabItem.Header>
+                    <TabItem.Content>
+                        <DataGrid x:Name="shiftsGrid"  IsReadOnly="True" ItemsSource="{Binding Shifts}" AutoGenerateColumns="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Binding="{Binding ArrivalTime}" Header="Начало" Width="*"/>
+                                <DataGridTextColumn Binding="{Binding LeavingTime}" Header="Конец" Width="*"/>
+                                <DataGridTextColumn Binding="{Binding Duration}" Header="Продолжительность" Width="*"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </TabItem.Content>
                 </TabItem>
                 <TabItem>
                     <TabItem.Header>
                         <TextBlock>Карты</TextBlock>
                     </TabItem.Header>
+                    <TabItem.Content>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <DataGrid x:Name="cardsGrid" AutoGenerateColumns="False"
+                                      CanUserAddRows="False">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Binding="{Binding Uid}" Header="Uid" Width="*" IsReadOnly="True"/>
+                                    <DataGridTextColumn Binding="{Binding IssueDate}" Header="Дата выдачи" Width="*" IsReadOnly="True"/>
+                                    <DataGridTextColumn Binding="{Binding ExpirationDate}" Header="Дата истечения" Width="*" IsReadOnly="True"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                            <Button x:Name="btnAddCard" Grid.Row="1" Margin="0 5 0 5" Click="BtnAddCard_OnClick">
+                                Добавить карту
+                            </Button>
+                        </Grid>
+                    </TabItem.Content>
                 </TabItem>
             </TabControl>
         </GroupBox>

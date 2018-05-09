@@ -1,4 +1,4 @@
-  namespace skud.Migrations
+namespace skud.Migrations
 {
     using System;
     using System.Data.Entity;

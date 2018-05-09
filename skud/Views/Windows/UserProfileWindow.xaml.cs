@@ -24,13 +24,19 @@ namespace skud.Views.Windows
     /// </summary>
     public partial class UserProfileWindow : Window, INotifyPropertyChanged
     {
-        public User User { get; set; }
+        public User User { get; private set; }
+        public List<WorkShift> Shifts { get; private set; }
+
         private SkudContext _ctx;
+        private int _userId;
 
         public UserProfileWindow(int userId)
         {
             InitializeComponent();
             DataContext = this;
+            _userId = userId;
+
+            // Загружаем пользователя
             _ctx = new SkudContext();
             User = _ctx.Users.Include(x=>x.Position).Include(x=>x.Department).Include(x=>x.Rank).FirstOrDefault(x => x.Id == userId);
             if (User == null)
@@ -38,8 +44,32 @@ namespace skud.Views.Windows
                 MessageBox.Show("Пользователь не найден", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
                 Close();
             }
+
+            // Загружаем рабочие смены пользователя
+            Shifts = (from shift in _ctx.WorkShifts
+                      join card in _ctx.Cards on shift.CardUid equals card.Uid
+                      where card.UserId == userId
+                      select shift).ToList();
+
+            // Загружаем карты
+            UpdateCards();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        private void BtnAddCard_OnClick(object sender, RoutedEventArgs e)
+        {
+            var dlg = new AddCardWindow(_userId);
+            if (dlg.ShowDialog() ?? false)
+            {
+                UpdateCards();
+            }
+        }
+
+        private void UpdateCards()
+        {
+            _ctx.Cards.Where(x => x.UserId == _userId).ToList();
+            cardsGrid.ItemsSource = _ctx.Cards.Local;
+        }
     }
 }
