@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data.Entity;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -21,20 +19,20 @@ using skud.Helpers;
 namespace skud.Views.Windows
 {
     /// <summary>
-    /// Interaction logic for RanksWindow.xaml
+    /// Interaction logic for DepartmentsWindow.xaml
     /// </summary>
-    public partial class RanksWindow : Window, INotifyPropertyChanged
+    public partial class DepartmentsWindow : Window
     {
         private SkudContext _ctx;
 
-        public RanksWindow()
+        public DepartmentsWindow()
         {
             InitializeComponent();
             DataContext = this;
             _ctx = new SkudContext();
             Update();
-        }
-       
+        }        
+
         private void BtnUpdate_OnClick(object sender, RoutedEventArgs e)
         {
             Update();
@@ -50,18 +48,16 @@ namespace skud.Views.Windows
         {
             while (grid.SelectedItems.Count > 0)
             {
-                var item = (Rank)grid.SelectedItems[0];
-                _ctx.Ranks.Remove(item);
+                var item = (Department)grid.SelectedItems[0];
+                _ctx.Departments.Remove(item);
             }
-        }        
+        }
 
         private void Update()
         {
-            EditHelpers.DetachAllEntities<Rank>(_ctx);
-            _ctx.Ranks.Load();            
-            grid.ItemsSource = _ctx.Ranks.Local;
+            EditHelpers.DetachAllEntities<Department>(_ctx);
+            _ctx.Departments.Load();
+            grid.ItemsSource = _ctx.Departments.Local;
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

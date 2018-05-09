@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Controls="clr-namespace:skud.Views.Controls"
         Title="Контроль пропусков" Height="650" Width="450"
-        MinHeight="650" MinWidth="450"
+        MinHeight="700" MinWidth="750"
         Background="#fff">
 
 
@@ -13,11 +13,16 @@
             <RowDefinition Height="auto"/>
             <RowDefinition  Height="auto"/>
             <RowDefinition  Height="auto"/>
-            <RowDefinition  Height="auto"/>
-            <RowDefinition/>
+            <RowDefinition  Height="*"/>
         </Grid.RowDefinitions>
-        <Menu Grid.Row="0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        
+        <Menu Grid.Row="0" Grid.ColumnSpan="2">
             <MenuItem Header="База">
+                <MenuItem x:Name="mnuDepartments" Header="Отделы" Click="MnuDepartments_OnClick"/>
                 <MenuItem x:Name="mnuPositions" Header="Должности" Click="mnuPositions_Click"/>
                 <MenuItem x:Name="mnuRanks" Header="Звания" Click="mnuRanks_Click"/>
                 <MenuItem x:Name="mnuUsers" Header="Пользователи" Click="mnuUsers_Click"/>
@@ -27,10 +32,11 @@
             <MenuItem Header="О программе"/>
         </Menu>
 
-        <Controls:AccessStatus Grid.Row="1" Margin="5 5 5 0" DataContext="{Binding Controller.Access}"/>
-        <Controls:Arrows Grid.Row="2" Margin="5 5 5 0" DataContext="{Binding Controller.Direction}"/>
-        <Controls:UserProfileCard Grid.Row="3" Margin="5 5 5 0" DataContext="{Binding Controller.User}"/>
-        <Controls:LogView Grid.Row="4"  Margin="5 5 5 5" DataContext="{Binding Controller.EventLog}"/>
+        <Controls:AccessStatus Grid.Row="1" Margin="5" DataContext="{Binding Controller.Access}"/>
+        <Controls:Arrows Grid.Row="2" Margin="5" DataContext="{Binding Controller.Direction}"/>
+        <Controls:UserProfileCard Grid.Row="3" Margin="5" DataContext="{Binding Controller.User}"/>
+        
+        <Controls:LogView Grid.Row="1" Grid.RowSpan="3" Grid.Column="1" Margin="5" DataContext="{Binding Controller.EventLog}"/>
 
     </Grid>
 </Window>

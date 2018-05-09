@@ -7,6 +7,94 @@
         mc:Ignorable="d"
         Title="UsersWindow" Height="450" Width="800">
     <Grid>
-        
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <DataGrid x:Name="grid" ItemsSource="{Binding Data}" AutoGenerateColumns="False"
+                      ColumnWidth="*" Margin="5"
+                      Grid.Row="0" Grid.ColumnSpan="2">
+                <DataGrid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem x:Name="mnuRemoveSelected" Header="Удалить записи" Click="MnuRemoveSelected_OnClick"/>
+                        <MenuItem x:Name="mnuShowProfile" Header="Открыть профиль" Click="MnuShowProfile_OnClick"></MenuItem>
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Id}" Header="Id" IsReadOnly="True" Width="50"/>
+                    <DataGridTemplateColumn Header="Фото">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Style="{StaticResource user_profile_image}" MaxWidth="70"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                        <DataGridTemplateColumn.CellEditingTemplate>
+                            <DataTemplate>
+                                <Button x:Name="mnuBrowse" Click="MnuBrowse_OnClick">Обзор</Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellEditingTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Binding="{Binding Surname}" Header="Фамилия"/>
+                    <DataGridTextColumn Binding="{Binding Name}" Header="Имя"/>
+                    <DataGridTextColumn Binding= "{Binding Middlename}" Header="Отчество"/>
+                    
+                    <DataGridComboBoxColumn Header="Отдел"
+                                            DisplayMemberPath="Name"
+                                            SelectedValuePath="Id"
+                                            SelectedValueBinding="{Binding DepartmentId}">
+                        <DataGridComboBoxColumn.ElementStyle>
+                            <Style TargetType="ComboBox">
+                                <Setter Property="ItemsSource" Value="{Binding Path=DataContext.Departments, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                            </Style>
+                        </DataGridComboBoxColumn.ElementStyle>
+                        <DataGridComboBoxColumn.EditingElementStyle>
+                            <Style TargetType="ComboBox">
+                                <Setter Property="ItemsSource" Value="{Binding Path=DataContext.Departments, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                            </Style>
+                        </DataGridComboBoxColumn.EditingElementStyle>
+                    </DataGridComboBoxColumn>
+
+                    <DataGridComboBoxColumn Header="Должность"
+                                            DisplayMemberPath="Name"
+                                            SelectedValuePath="Id"
+                                            SelectedValueBinding="{Binding PositionId}">
+                        <DataGridComboBoxColumn.ElementStyle>
+                            <Style TargetType="ComboBox">
+                                <Setter Property="ItemsSource" Value="{Binding Path=DataContext.Positions, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                            </Style>
+                        </DataGridComboBoxColumn.ElementStyle>
+                        <DataGridComboBoxColumn.EditingElementStyle>
+                            <Style TargetType="ComboBox">
+                                <Setter Property="ItemsSource" Value="{Binding Path=DataContext.Positions, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                            </Style>
+                        </DataGridComboBoxColumn.EditingElementStyle>
+                    </DataGridComboBoxColumn>
+
+                    <DataGridComboBoxColumn Header="Звание"
+                                            DisplayMemberPath="Name"
+                                            SelectedValuePath="Id"
+                                            SelectedValueBinding="{Binding RankId}">
+                        <DataGridComboBoxColumn.ElementStyle>
+                            <Style TargetType="ComboBox">
+                                <Setter Property="ItemsSource" Value="{Binding Path=DataContext.Ranks, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                            </Style>
+                        </DataGridComboBoxColumn.ElementStyle>
+                        <DataGridComboBoxColumn.EditingElementStyle>
+                            <Style TargetType="ComboBox">
+                                <Setter Property="ItemsSource" Value="{Binding Path=DataContext.Ranks, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                            </Style>
+                        </DataGridComboBoxColumn.EditingElementStyle>
+                    </DataGridComboBoxColumn>
+                    
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button x:Name="btnUpdate" Grid.Row="1" Grid.Column="0" Margin="5" Click="BtnUpdate_OnClick">Обновить</Button>
+            <Button x:Name="btnSave" Grid.Row="1" Grid.Column="1" Margin="5" Click="BtnSave_OnClick">Сохранить</Button>
+        </Grid>
     </Grid>
 </Window>

@@ -109,6 +109,9 @@
     <Compile Include="Views\Controls\UserProfileCard.xaml.cs">
       <DependentUpon>UserProfileCard.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Windows\DepartmentsWindow.xaml.cs">
+      <DependentUpon>DepartmentsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Windows\HistoryWindow.xaml.cs">
       <DependentUpon>HistoryWindow.xaml</DependentUpon>
     </Compile>
@@ -117,6 +120,9 @@
     </Compile>
     <Compile Include="Views\Windows\RanksWindow.xaml.cs">
       <DependentUpon>RanksWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\UserProfileWindow.xaml.cs">
+      <DependentUpon>UserProfileWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Windows\UsersWindow.xaml.cs">
       <DependentUpon>UsersWindow.xaml</DependentUpon>
@@ -130,6 +136,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Controls\LogView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\DepartmentsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -166,6 +176,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Windows\RanksWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\UserProfileWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

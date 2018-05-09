@@ -40,7 +40,7 @@ namespace skud
 
             Controller = new AccessController(new SkudContext());
             _arduino = new ArduinoGateway(Controller.AccessRequest);
-            new FakeHardwareWindow(Controller.AccessRequest).Show();            
+            new FakeHardwareWindow(Controller.AccessRequest).Show();  
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -70,6 +70,11 @@ namespace skud
         private void mnuHistory_Click(object sender, RoutedEventArgs e)
         {
             new HistoryWindow().Show();
+        }
+
+        private void MnuDepartments_OnClick(object sender, RoutedEventArgs e)
+        {
+            new DepartmentsWindow().Show();
         }
     }
 

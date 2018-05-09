@@ -1,0 +1,34 @@
+﻿<Window x:Class="skud.Views.Windows.DepartmentsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:skud.Views.Windows"
+        mc:Ignorable="d"
+        Title="DepartmentsWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <DataGrid x:Name="grid" ItemsSource="{Binding Data}" AutoGenerateColumns="False"
+                  ColumnWidth="*" Margin="5"
+                  Grid.Row="0" Grid.ColumnSpan="2">
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem x:Name="mnuRemoveSelected" Click="MnuRemoveSelected_OnClick" Header="Удалить записи"/>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Id}" Header="Id" IsReadOnly="True" Width="50"/>
+                <DataGridTextColumn Binding="{Binding Name}" Header="Название"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="btnUpdate" Grid.Row="1" Grid.Column="0" Margin="5" Click="BtnUpdate_OnClick" >Обновить</Button>
+        <Button x:Name="btnSave" Grid.Row="1" Grid.Column="1" Margin="5" Click="BtnSave_OnClick">Сохранить</Button>
+    </Grid>
+</Window>

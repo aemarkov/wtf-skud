@@ -4,6 +4,11 @@
              xmlns:conv="clr-namespace:skud.Converters"
              StartupUri="Views/Windows/MainWindow.xaml">
     <Application.Resources>
+        
+        <!-- КОНВЕРТЕРЫ -->
+        <conv:IsNullConverter x:Key="IsNullConverter"/>
+        
+        <!-- Шаблон GroupBox -->
         <ControlTemplate x:Key="groupbox_template" TargetType="{x:Type GroupBox}">
             <Grid>
                 <Grid.RowDefinitions>
@@ -30,12 +35,20 @@
 
             </Grid>
         </ControlTemplate>
-        
+
         <Style TargetType="{x:Type GroupBox}">
             <Setter Property="Template" Value="{StaticResource groupbox_template}"/>
         </Style>
         
-        <conv:IsNullConverter x:Key="IsNullConverter"/>
-        
+        <!-- Изображение пользователя -->
+        <Style x:Key="user_profile_image" TargetType="{x:Type Image}">
+            <Setter Property="Source" Value="/Images/person-male.png"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Photo, Converter={StaticResource IsNullConverter}}" Value="False">
+                    <Setter Property="Source" Value="{Binding Photo}"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
     </Application.Resources>
 </Application>

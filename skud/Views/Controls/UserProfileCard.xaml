@@ -4,27 +4,23 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
+             MinWidth="200"
              d:DesignHeight="200" d:DesignWidth="400">
     
     <UserControl.Resources>
-        <Style TargetType="{x:Type Image}">
-            <Setter Property="Source" Value="/Images/person-male.png"/>
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding Photo, Converter={StaticResource IsNullConverter}}" Value="False">
-                    <Setter Property="Source" Value="{Binding Photo}"/>
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
+
     </UserControl.Resources>
     
     <GroupBox Header="Пользователь">
         <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition MaxWidth="300"/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Image Grid.Column="0" Margin="0, 0, 5, 0"/>
-            <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Image Grid.Column="0" Grid.Row="0" Style="{StaticResource user_profile_image}"
+                   MaxHeight="300" MaxWidth="300"/>
+            
+            <Grid Grid.Row="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
@@ -46,6 +42,7 @@
                 <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding Rank.Name}" TextWrapping="Wrap"/>
                 <TextBlock Grid.Row="3" Grid.Column="2" Text="{Binding Department.Name}" TextWrapping="Wrap"/>
             </Grid>
+            
         </Grid>
     </GroupBox>
 </UserControl>

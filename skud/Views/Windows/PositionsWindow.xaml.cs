@@ -51,7 +51,11 @@ namespace skud.Views.Windows
 
         private void MnuRemoveSelected_OnClick(object sender, RoutedEventArgs e)
         {
-          
+            while (grid.SelectedItems.Count > 0)
+            {
+                var item = (Rank)grid.SelectedItems[0];
+                _ctx.Ranks.Remove(item);
+            }
         }
 
         private void Update()
