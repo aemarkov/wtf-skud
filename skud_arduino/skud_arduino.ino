@@ -18,74 +18,157 @@
 
 #define RST_PIN         49
 #define SS_PIN          53
+#define DIRECTION_PIN   A0
+#define GREEN_PIN       2
+#define RED_PIN         3
+#define SOUND_PIN       4
 
 MFRC522 rfid(SS_PIN, RST_PIN);
 uint8_t header[]={0x37, 0x83};
+
+// Направление движения
+enum Direction
+{
+  NONE,
+  IN,
+  OUT
+};
+
+enum Access
+{
+  ACCESS_NONE,
+  GRANTED,
+  DENIED
+};
 
 void setup()
 { 
   Serial.begin(9600);
   SPI.begin();
   rfid.PCD_Init();
+
+  pinMode(GREEN_PIN, OUTPUT);
+  pinMode(RED_PIN, OUTPUT);
+  pinMode(SOUND_PIN, OUTPUT);
 }
  
 void loop()
 {
-
-  // Look for new cards
+  // Ждем карту
   if ( ! rfid.PICC_IsNewCardPresent())
     return;
 
-  // Verify if the NUID has been readed
+  // Проверяем, что UID считатн
   if ( ! rfid.PICC_ReadCardSerial())
     return;
 
+  // Проверяем тип карты
   MFRC522::PICC_Type piccType = rfid.PICC_GetType(rfid.uid.sak);
 
   // Check is the PICC of Classic MIFARE type
   if (piccType != MFRC522::PICC_TYPE_MIFARE_MINI &&  
       piccType != MFRC522::PICC_TYPE_MIFARE_1K &&
       piccType != MFRC522::PICC_TYPE_MIFARE_4K)
-  {
-    //Serial.println(F("Your tag is not of type MIFARE Classic."));
+  {    
     return;
   }
 
-  //Serial.println(F("UID:"));
-  //printHex(rfid.uid.uidByte, rfid.uid.size);
+  // Проверяем направление движение
+  Direction dir = get_direction();
+  
+  // Формируем пакет  
   Serial.write(header, sizeof(header));
   Serial.write(rfid.uid.uidByte, rfid.uid.size);
+  Serial.write((uint8_t*)&dir, sizeof(dir)); 
+  Serial.flush();
 
-  // Halt PICC
+  // Завершаем операцию с картой
   rfid.PICC_HaltA();
-
-  // Stop encryption on PCD
   rfid.PCD_StopCrypto1();
-}
 
-
-/**
- * Helper routine to dump a byte array as hex values to Serial. 
- */
-void printHex(byte *buffer, byte bufferSize)
-{
-  for (byte i = 0; i < bufferSize; i++)
+  // Ждем ответ
+  int accessRaw = get_response(); 
+  if(accessRaw == -1)
   {
-    Serial.print(buffer[i] < 0x10 ? " 0" : " ");
-    Serial.print(buffer[i], HEX);
+    // Таймаут, ответ не пришел    
+    beep(200, 100);
+    return;
   }
-  Serial.println();
+    
+  
+  // Если получен ответ от ПК
+  Access access = (Access)accessRaw;
+
+  if(access == GRANTED)
+  {
+    digitalWrite(GREEN_PIN, 1);
+    beep_granted();
+    delay(500);
+    digitalWrite(GREEN_PIN, 0);
+  }
+  else if(access == DENIED)
+  {
+    digitalWrite(RED_PIN, 1);
+    beep_denied();
+    delay(500);
+    digitalWrite(RED_PIN, 0);
+  }
+  else
+  {
+    beep_info();
+  }   
 }
 
-/**
- * Helper routine to dump a byte array as dec values to Serial.
- */
-void printDec(byte *buffer, byte bufferSize)
+int get_response()
 {
-  for (byte i = 0; i < bufferSize; i++)
+  int cnt = 1000;
+  while(Serial.available()==0 && cnt > 0)  
   {
-    Serial.print(buffer[i] < 0x10 ? " 0" : " ");
-    Serial.print(buffer[i], DEC);
+    cnt--;  
+    delay(1);
   }
-  Serial.println();
+    
+  int x = Serial.read();
+  return x;
 }
+
+// Определяет направление движения
+Direction get_direction()
+{
+  int dirRaw = analogRead(DIRECTION_PIN);
+  Direction dir = NONE;
+
+  if(dirRaw < 100)
+    dir = IN;
+  else if(dirRaw > 900)
+    dir = OUT;
+
+  return dir;
+}
+
+void beep_info()
+{
+  beep(1000, 100);
+}
+
+void beep_granted()
+{
+  beep(1000, 300);
+}
+
+void beep_denied()
+{
+  for(int i = 0; i<3; i++)
+  {
+    beep(200, 100);
+    delay(100);
+  }
+}
+
+void beep(int freq, int duration)
+{
+  tone(SOUND_PIN, freq);
+  delay(duration);
+  noTone(SOUND_PIN);
+}
+

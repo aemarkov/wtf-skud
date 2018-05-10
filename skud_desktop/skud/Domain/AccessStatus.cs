@@ -8,7 +8,8 @@ namespace skud.Domain
 {
     public enum AccessStatus
     {
+        NONE,
         GRANTED,
-        DENIED
+        DENIED        
     }
 }

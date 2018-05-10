@@ -42,6 +42,7 @@ namespace skud.Views.Windows
         private void Instance_CardRead(ulong uid)
         {
             CardUid = uid;
+            ArduinoGateway.Instance.SendResponse(AccessStatus.NONE);
         }
 
         private void BtnCancel_OnClick(object sender, RoutedEventArgs e)

@@ -85,7 +85,7 @@ namespace skud.Domain
                 Status = Access.Value
             });
 
-            ArduinoGateway.Instance.SetAccess(Access.Value);
+            ArduinoGateway.Instance.SendResponse(Access.Value);
         }
 
         private User GetUser(ulong uid)

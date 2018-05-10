@@ -8,6 +8,6 @@ namespace skud.Domain
 {
     public enum Direction
     {
-        IN, OUT
+        NONE, IN, OUT
     }
 }
