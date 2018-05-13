@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:skud.Views.Windows"
         mc:Ignorable="d"
-        Title="AddCardWindow" Height="170" Width="270" ResizeMode="NoResize">
+        Title="Добавление карты" Height="170" Width="270" ResizeMode="NoResize">
     
     <Window.Resources>
         <Style x:Key="card_label_style" TargetType="{x:Type TextBlock}">

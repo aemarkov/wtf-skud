@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:skud.Views.Windows"
         mc:Ignorable="d"
-        Title="Редактирование должностей" Height="450" Width="400">
+        Title="Должности" Height="300" Width="400">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>

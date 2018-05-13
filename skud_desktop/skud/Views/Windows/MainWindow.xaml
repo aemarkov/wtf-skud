@@ -25,8 +25,7 @@
                 <MenuItem x:Name="mnuDepartments" Header="Отделы" Click="MnuDepartments_OnClick"/>
                 <MenuItem x:Name="mnuPositions" Header="Должности" Click="mnuPositions_Click"/>
                 <MenuItem x:Name="mnuRanks" Header="Звания" Click="mnuRanks_Click"/>
-                <MenuItem x:Name="mnuUsers" Header="Пользователи" Click="mnuUsers_Click"/>
-                <MenuItem x:Name="mnuHistory" Header="История" Click="mnuHistory_Click"/>
+                <MenuItem x:Name="mnuUsers" Header="Сотрудники" Click="mnuUsers_Click"/>
             </MenuItem>
             <MenuItem Header="Настройки"/>
             <MenuItem Header="О программе"/>

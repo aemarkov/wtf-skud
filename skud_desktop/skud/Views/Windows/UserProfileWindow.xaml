@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:skud.Views.Windows"
         xmlns:Controls="clr-namespace:skud.Views.Controls"
         mc:Ignorable="d"
-        Title="UserProfileWindow" Height="750" Width="600"
+        Title="Профиль сотрудника" Height="750" Width="600"
         MinHeight="750" MinWidth="600">
     <Grid>
         <Grid.RowDefinitions>
