@@ -129,6 +129,8 @@ int get_response()
   }
     
   int x = Serial.read();
+  while(Serial.available() > 0)
+    Serial.read();
   return x;
 }
 

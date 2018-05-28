@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Threading;
 using System.IO.Ports;
+using System.Configuration;
+using System.Linq;
+using skud.Properties;
 
 namespace skud.Domain
 {
@@ -29,12 +32,25 @@ namespace skud.Domain
         private PackageBuilder _builder;
         private byte[] _sendPacket = new byte[1];
 
-        private ArduinoGateway()
+
+
+        public static void Init(string port)
+        {
+            if (instance != null)
+                throw new Exception("Already initialized");
+
+            Monitor.Enter(s_lock);
+            var temp = new ArduinoGateway(port);
+            Interlocked.Exchange(ref instance, temp);
+            Monitor.Exit(s_lock);
+        }
+
+        private ArduinoGateway(string port)
         {
             _builder = new PackageBuilder(new byte[] { 0x37, 0x83 }, 5);
             _builder.PackageReceived += _builder_PackageReceived;
 
-            _port = new SerialPort("COM3", 9600);
+            _port = new SerialPort(port, 9600);
             _port.Open();
             _port.DataReceived += _port_DataReceived;
         }     
@@ -74,6 +90,8 @@ namespace skud.Domain
                 AccessRequested(uid, dir);            
         }
 
+
+
         // Синглтон
 
         public static ArduinoGateway Instance
@@ -81,11 +99,7 @@ namespace skud.Domain
             get
             {
                 if (instance != null) return instance;
-                Monitor.Enter(s_lock);
-                var temp = new ArduinoGateway();
-                Interlocked.Exchange(ref instance, temp);
-                Monitor.Exit(s_lock);
-                return instance;
+                throw new Exception("Not initialized");
             }
         }
 
@@ -105,5 +119,19 @@ namespace skud.Domain
         {
             _port?.Dispose();
         }
+
+        public static string[] GetPorts()
+        {
+            return SerialPort.GetPortNames();
+        }
+
+        /*public static string GetPort()
+        {
+            string com =  ConfigurationManager.AppSettings["com"];
+            if (GetPorts().Contains(com))
+                return com;
+            else
+                return null;
+        }*/
     }
 }

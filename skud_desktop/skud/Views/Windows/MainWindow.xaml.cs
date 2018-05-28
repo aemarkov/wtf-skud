@@ -27,7 +27,7 @@ namespace skud
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window, INotifyPropertyChanged
-    {      
+    {
         public AccessController Controller { get; set; }
 
         public MainWindow()
@@ -35,13 +35,26 @@ namespace skud
             InitializeComponent();
             DataContext = this;
 
+
+            var dlg = new SelectPortWindow();
+            if (dlg.ShowDialog() == true)
+            {
+                string com = dlg.SelectedPort;
+                ArduinoGateway.Init(com);
+            }
+            else
+            {
+                MessageBox.Show("COM-порт не выбран!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                Application.Current.Shutdown();
+                return;
+            }
+
+            
             Controller = new AccessController(new SkudContext());
-            /*_arduino = new ArduinoGateway(Controller.AccessRequest);
-            new FakeHardwareWindow(Controller.AccessRequest).Show();*/
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-       
+
 
         protected override void OnClosed(EventArgs e)
         {
@@ -75,5 +88,5 @@ namespace skud
         }
     }
 
-    
+
 }

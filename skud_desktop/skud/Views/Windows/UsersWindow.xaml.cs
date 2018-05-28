@@ -10,6 +10,7 @@ using skud.Data;
 using skud.Domain.Models;
 using skud.Helpers;
 using MessageBox = System.Windows.MessageBox;
+using System.IO;
 
 namespace skud.Views.Windows
 {
@@ -81,8 +82,16 @@ namespace skud.Views.Windows
 
             if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
+                if(!Directory.Exists("Photos"))
+                    Directory.CreateDirectory("Photos");
+                
+
+                string extension = Path.GetExtension(dlg.FileName);
+                string saveFile = Path.Combine("Photos", Guid.NewGuid().ToString() + extension);
+                File.Copy(dlg.FileName, saveFile);
+
                 var item = (User)grid.SelectedItem;
-                item.Photo = dlg.FileName;
+                item.Photo = saveFile;
                 grid.CommitEdit();
             }
             else
